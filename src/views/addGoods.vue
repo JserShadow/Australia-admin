@@ -78,6 +78,7 @@ export default {
         imgs: goodsImgs,
         introduction: goodsInfomation
       };
+      console.log(objToTrans);
       const response = await util.ajax.post('/saveGoods', objToTrans);
       if (response.status !== 200) {
         this.loading = false;
