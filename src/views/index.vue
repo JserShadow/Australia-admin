@@ -21,19 +21,20 @@
                 <Button type="error" size="large" long :loading="deleteLoading" @click="del">确认删除</Button>
             </div>
         </Modal>
-        <Button type="info" @click.native="addGoods">添加商品</Button>
         <Card :bordered="true" v-for="item in allData" :key="item._id">
             <div class="goodsTitle" slot="title">
                 <p>{{item.name}}</p>
+                <Button type="info" icon="compose" shape="circle" @click.native="handleEdit(item)">编辑</Button>
                 <Button type="error" icon="close-round" shape="circle" @click.native="handleDelete(item)">删除</Button>
             </div>
             <p>价格: {{item.price}}</p>
             <p>类别: {{item.catagory}}</p>
             <p>商品介绍: {{item.introduction}}</p>
             <p>
-                <img style="width: 80px;height: 80px" v-for="img in item.imgs" :src="img" alt="picture">
+                <img style="width: 80px;height: 80px" v-for="img in item.imgs" :src="img" alt="picture" :key="img">
             </p>
         </Card>
+        <Button type="info" @click.native="addGoods" style="margin: 15px 40%; padding: 10px 50px">添加商品</Button>
     </div>
 </template>
 <script>
@@ -65,6 +66,9 @@
                     const allData = await axios.ajax.get('/getAllGoods');
                     this.allData = allData.data;
                 }
+            },
+            handleEdit(item) {
+                this.$router.push('/editGoods?id=' + item._id);
             }
         },
         async mounted() {

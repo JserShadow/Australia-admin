@@ -31,6 +31,7 @@
                 <div style="padding: 20px 0">
                     <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
                     <p>Click or drag files here to upload</p>
+                    <p>注：编辑商品时需要重新上传图片</p>
                 </div>
             </Upload>
         </FormItem>
@@ -79,14 +80,27 @@ export default {
         introduction: goodsInfomation
       };
       console.log(objToTrans);
-      const response = await util.ajax.post('/saveGoods', objToTrans);
-      if (response.status !== 200) {
-        this.loading = false;
-        this.$Notice.error({
-          title: '上传失败',
-          desc: '请检查网络，如网络无问题请联系管理员'
-        })
-        return;
+      if (this.$router.currentRoute.path === '/addGoods') {
+        const response = await util.ajax.post('/saveGoods', objToTrans);
+        if (response.status !== 200) {
+          this.loading = false;
+          this.$Notice.error({
+            title: '上传失败',
+            desc: '请检查网络，如网络无问题请联系管理员'
+          })
+          return;
+        }
+      } else {
+        objToTrans._id = this.$router.currentRoute.query.id;
+        const response = await util.ajax.post('/updateGoods', objToTrans);
+        if (response.status !== 200) {
+          this.loading = false;
+          this.$Notice.error({
+            title: '上传失败',
+            desc: '请检查网络，如网络无问题请联系管理员'
+          })
+          return;
+        }
       }
       this.loading = false;
       this.$router.push('/');
@@ -128,6 +142,16 @@ export default {
         title: '文件上传失败',
         desc: 'File upload error: ' + error
       })
+    }
+  },
+  async mounted() {
+    const mongoID = this.$router.currentRoute.query.id;
+    if (mongoID) {
+      const res = await util.ajax.post('/findGoodsById', { id: mongoID });
+      this.goodsName = res.data.name;
+      this.goodsPrice = res.data.price;
+      this.goodsInfomation = res.data.introduction;
+      this.selector.value = res.data.catagory;
     }
   }
 }

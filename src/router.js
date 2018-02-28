@@ -10,5 +10,11 @@ const routers = [{
         title: '添加商品'
     },
     component: (resolve) => require(['./views/addGoods.vue'], resolve)
+}, {
+    path: '/editGoods',
+    meta: {
+        title: '修改商品'
+    },
+    component: (resolve) => require(['./views/addGoods.vue'], resolve)
 }];
 export default routers;
