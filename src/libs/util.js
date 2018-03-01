@@ -5,14 +5,14 @@ let util = {
 
 };
 util.title = function(title) {
-    title = title ? title + ' - Home' : 'iView project';
+    title = title ? title + ' - Home' : '正在加载...';
     window.document.title = title;
 };
 
 const ajaxUrl = env === 'development' ?
-    'http://127.0.0.1:7001' :
+    'http://localhost:7001' :
     env === 'production' ?
-    'https://www.url.com' :
+    'http://47.94.5.252:7002' :
     'https://debug.url.com';
 
 util.ajax = axios.create({
