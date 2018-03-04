@@ -40,6 +40,7 @@
 <script>
     import axios from '../libs/util'
     export default {
+        name: 'Index',
         data() {
             return {
                 allData: [],

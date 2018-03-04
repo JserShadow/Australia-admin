@@ -50,6 +50,7 @@
 <script>
 import util from '../libs/util.js';
 export default {
+  name: 'AddGoods',
   data() {
     return {
       goodsName: '',
