@@ -144,16 +144,16 @@ export default {
       })
     }
   },
-  async mounted() {
-    const mongoID = this.$router.currentRoute.query.id;
-    if (mongoID) {
-      const res = await util.ajax.post('/findGoodsById', { id: mongoID });
-      this.goodsName = res.data.name;
-      this.goodsPrice = res.data.price;
-      this.goodsInfomation = res.data.introduction;
-      this.selector.value = res.data.catagory;
-    }
-  }
+  // async mounted() {
+  //   const mongoID = this.$router.currentRoute.query.id;
+  //   if (mongoID) {
+  //     const res = await util.ajax.post('/findGoodsById', { id: mongoID });
+  //     this.goodsName = res.data.name;
+  //     this.goodsPrice = res.data.price;
+  //     this.goodsInfomation = res.data.introduction;
+  //     this.selector.value = res.data.catagory;
+  //   }
+  // }
 }
 </script>
 
