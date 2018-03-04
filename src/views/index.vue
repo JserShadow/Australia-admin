@@ -71,10 +71,10 @@
                 this.$router.push('/editGoods?id=' + item._id);
             }
         },
-        // async mounted() {
-        //     const allData = await axios.ajax.get('/getAllGoods');
-        //     this.allData = allData.data;
-        //     console.log(this.allData);
-        // }
+        async mounted() {
+            const allData = await axios.ajax.get('/getAllGoods');
+            this.allData = allData.data;
+            console.log(this.allData);
+        }
     };
 </script>
